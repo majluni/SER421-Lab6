@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Lab6</string>
     <string name="wvURL">file:///android_asset/html/clue.html</string>
+    <string name="badUser">Please enter a username</string>
 </resources>
