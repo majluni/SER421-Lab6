@@ -22,13 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (!username.equals("")) {
             Intent wv = new Intent(this, WebViewActivity.class);
+            wv.putExtra("name",username);
             startActivity(wv);
         }
         else {
             Button pressed = findViewById(R.id.button);
             pressed.setVisibility(View.VISIBLE);
             TextView info = findViewById(R.id.textView2);
-            info.setText(getString(R.string.badUser));
+            info.setText("Enter a username");
         }
     }
 }
+
