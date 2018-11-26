@@ -1,4 +1,4 @@
-package majluni_dghowart.lab6;
+package com.example.dhowa.ser421;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view2);
+        setContentView(R.layout.activity_web_view);
 
         final String name = getIntent().getStringExtra("name");
 
@@ -27,13 +27,16 @@ public class WebViewActivity extends AppCompatActivity {
 
         web.setAllowUniversalAccessFromFileURLs(true);
         web.setDomStorageEnabled(true);
+        web.setJavaScriptEnabled(true);
         browser.setWebViewClient(new WebViewClient(){
             public void onPageFinished(WebView view, String url){
-            browser.evaluateJavascript("changeName(\""+ name+ "\")", null);
-            browser.evaluateJavascript("welcomeUser()",null);
+                System.out.println("name");
+                browser.evaluateJavascript("changeName(\""+ name+ "\")", null);
+                browser.evaluateJavascript("welcomeUser()",null);
+
             }}
         );
-        browser.evaluateJavascript("welcomeUser()",null);
+        System.out.println("user");
         browser.loadUrl("file:///android_asset/html/clue.html");
 
     }
