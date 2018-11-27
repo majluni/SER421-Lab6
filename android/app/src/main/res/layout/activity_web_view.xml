@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="89dp">
     <!--Used: https://stackoverflow.com/questions/40493418/cannot-resolve-symbol-webview-on-android-studio bycaptainserious
          for this line to fix the web view errors-->
-<WebView android:id="@+id/webView"
+    <WebView android:id="@+id/webView"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
 

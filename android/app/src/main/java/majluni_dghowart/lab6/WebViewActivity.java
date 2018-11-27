@@ -1,4 +1,4 @@
-package com.example.dhowa.ser421;
+package majluni_dghowart.lab6;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.webkit.WebViewClient;
 
 public class WebViewActivity extends AppCompatActivity {
     private WebView browser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,10 @@ public class WebViewActivity extends AppCompatActivity {
                 System.out.println("name");
                 browser.evaluateJavascript("changeName(\""+ name+ "\")", null);
                 browser.evaluateJavascript("welcomeUser()",null);
-
             }}
         );
-        System.out.println("user");
-        browser.loadUrl("file:///android_asset/html/clue.html");
 
+        browser.loadUrl("file:///android_asset/html/clue.html");
+        browser.addJavascriptInterface(new JSInterface(this), "Android");
     }
 }

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             Button pressed = findViewById(R.id.button);
             pressed.setVisibility(View.VISIBLE);
             TextView info = findViewById(R.id.textView2);
-            info.setText("Enter a username");
+            info.setText(R.string.info_text);
         }
     }
 }
