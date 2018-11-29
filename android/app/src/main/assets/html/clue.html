@@ -25,14 +25,14 @@
 		Show History
 	</button>
 	<br>
-	<span id="guessHistoryDetails" hidden></span>
+	<p id="guessHistoryDetails" hidden ></p>
 </div>
 <div id="showRecord">
 	<button type="button" onclick="showRecord()" id="recordBtn">
 		Show Record
 	</button>
 	<br>
-	<span id="recordDetails" hidden></span>
+	<p id="recordDetails" hidden></p>
 </div>
 <script type="text/javascript">
     var suspects = ["Miss Scarlet", "Professor Plum", "Mrs. Peacock", "Reverend Green", "Colonel Mustard"];
@@ -286,7 +286,8 @@
 		if(document.getElementById("guessHistoryDetails").hasAttribute("hidden")) {
 			document.getElementById("historyBtn").innerHTML = "Hide History";
 			document.getElementById("guessHistoryDetails").removeAttribute("hidden");
-			document.getElementById("guessHistoryDetails").innerHTML = sessionStorage.get("history") + "test";
+			document.getElementById("guessHistoryDetails").innerHTML = sessionStorage.getItem("history") + "test";
+
 		} else {
 			document.getElementById("guessHistoryDetails").setAttribute("hidden", true);
 			document.getElementById("historyBtn").innerHTML = "Show History";
@@ -296,7 +297,7 @@
 		if(document.getElementById("recordDetails").hasAttribute("hidden")) {
 			document.getElementById("recordBtn").innerHTML = "Hide Record";
 			document.getElementById("recordDetails").removeAttribute("hidden");
-			document.getElementById("recordDetails").innerHTML = localStorage.get("record");
+			document.getElementById("recordDetails").innerHTML = localStorage.getItem("record");
 		} else {
 			document.getElementById("recordDetails").setAttribute("hidden", true);
 			document.getElementById("recordBtn").innerHTML = "Show Record";
