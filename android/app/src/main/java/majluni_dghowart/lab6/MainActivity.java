@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String historyString = extras.getString("history");
-            Log.i("output", historyString);
+
             if (historyString != null) {
                 try {
                     JSONObject historyJSON = new JSONObject(historyString);
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
                     TextView history = findViewById(R.id.textView3);
                     history.setText("In the last game, " + username + " won after " + guesses +
-                            " rounds by guessing " + suspect + " in the " + room + " with a " +
+                            "\nrounds by guessing " + suspect + " in the " + room + " with a " +
                             weapon);
                 }
                 catch (JSONException e) {

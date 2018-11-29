@@ -17,7 +17,7 @@ public class WebViewActivity extends AppCompatActivity {
 
         final String name = getIntent().getStringExtra("name");
 
-        browser = (WebView)findViewById(R.id.webView);
+        browser = findViewById(R.id.webView);
         browser.setHorizontalScrollBarEnabled(true);
         browser.setVerticalScrollBarEnabled(true);
 
@@ -31,11 +31,10 @@ public class WebViewActivity extends AppCompatActivity {
         web.setJavaScriptEnabled(true);
         browser.setWebViewClient(new WebViewClient(){
             public void onPageFinished(WebView view, String url){
-                System.out.println("name");
                 browser.evaluateJavascript("changeName(\""+ name+ "\")", null);
                 browser.evaluateJavascript("welcomeUser()",null);
-            }}
-        );
+            }
+        });
 
         browser.loadUrl("file:///android_asset/html/clue.html");
         browser.addJavascriptInterface(new JSInterface(this), "Android");

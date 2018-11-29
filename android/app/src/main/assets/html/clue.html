@@ -35,6 +35,7 @@
 	<p id="recordDetails" hidden></p>
 </div>
 <script type="text/javascript">
+	'use strict';
     var suspects = ["Miss Scarlet", "Professor Plum", "Mrs. Peacock", "Reverend Green", "Colonel Mustard"];
     var rooms = ["Lounge", "Hall", "Study", "Library", "Billiard Room"];
     var weapons = ["Candlestick", "Dagger", "Lead pipe", "Revolver", "Rope"];
@@ -266,8 +267,13 @@
         document.getElementById("guessBtn").disabled = false;
         if(gameEndStatus) {
             restartGame(); // restart game
-			let jsonArr = JSON.stringify({username: username, guesses: guesses, room: secretToGuess["room"], suspect: secretToGuess["suspect"], weapon: secretToGuess["weapon"]});
-			//console.log(jsonArr);
+            let jsonArr = "";
+			if (winner === "Computer") {
+				jsonArr = JSON.stringify({username: "the computer", guesses: guesses, room: secretToGuess["room"], suspect: secretToGuess["suspect"], weapon: secretToGuess["weapon"]});
+			}
+			else {
+				jsonArr = JSON.stringify({username: username, guesses: guesses, room: secretToGuess["room"], suspect: secretToGuess["suspect"], weapon: secretToGuess["weapon"]});
+			}
             Android.goBack(jsonArr);
         } else {
             if(usersTurn) {
@@ -287,7 +293,7 @@
 			document.getElementById("guessHistoryDetails").setAttribute("hidden", true);
 			document.getElementById("historyBtn").innerHTML = "Show History";
 				}
-			}
+	}
 	function showRecord(){
 		if(document.getElementById("recordDetails").hasAttribute("hidden")) {
 			document.getElementById("recordBtn").innerHTML = "Hide Record";
@@ -296,8 +302,8 @@
 		} else {
 			document.getElementById("recordDetails").setAttribute("hidden", true);
 			document.getElementById("recordBtn").innerHTML = "Show Record";
-				}
-			}
+		}
+	}
     function changeName(name){
         document.getElementById("username").value = name;
     }
