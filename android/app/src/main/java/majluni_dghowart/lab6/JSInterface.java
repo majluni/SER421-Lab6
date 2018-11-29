@@ -1,4 +1,4 @@
-package majluni_dghowart.lab6;
+package com.example.dhowa.ser421;
 
 import android.content.Context;
 import android.content.Intent;
