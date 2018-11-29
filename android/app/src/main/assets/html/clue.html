@@ -238,6 +238,7 @@
     }
     // When the user’s (incorrect) move is complete, have the Computer make a guess. A simple random guess will do,though the program should know not to guess cards that it itself holds. Like #4, display a message indicating whether the Computer’s guess was correct or not, and a Continue button at the end. CAVEAT: The distinction here is that you are told the Computer’s guess, but should not be told the incorrect component of the guess, which is different than what happens for the user (5.b.2).
     function computerGuess() {
+
         var filteredSuspects = suspects.filter(function(x) { return computersHand.indexOf(x) < 0 }); // the longer way is to use two for loops and remove common elements
         var filteredRooms = rooms.filter(function(x) { return computersHand.indexOf(x) < 0 }); // the longer way is to use two for loops and remove common elements
         var filteredWeapons = weapons.filter(function(x) { return computersHand.indexOf(x) < 0 }); // the longer way is to use two for loops and remove common elements
@@ -249,7 +250,7 @@
         if(sessionStorage.getItem("history") != null)
             str = sessionStorage.getItem("history");
 
-        str += "<br>" + username + " guessed : " + selectedRoom + "," + selectedSuspect + "," + selectedWeapon;
+        str += "<br>" + username + " guessed : " +  computersGuess.room  + "," + computersGuess.suspect + "," + computersGuess.weapon;
         sessionStorage.setItem("history", str);
 
 
