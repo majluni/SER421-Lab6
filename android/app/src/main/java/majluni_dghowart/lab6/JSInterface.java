@@ -1,4 +1,4 @@
-package com.example.dhowa.ser421;
+package majluni_dghowart.lab6;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,9 @@ public class JSInterface {
     }
 
     @JavascriptInterface
-    public void goBack() {
+    public void goBack(String history) {
         Intent mA  = new Intent(context, MainActivity.class);
+        mA.putExtra("history", history);
         context.startActivity(mA);
     }
 }

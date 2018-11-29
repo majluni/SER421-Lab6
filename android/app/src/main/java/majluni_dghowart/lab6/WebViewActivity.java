@@ -1,4 +1,4 @@
-package com.example.dhowa.ser421;
+package majluni_dghowart.lab6;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

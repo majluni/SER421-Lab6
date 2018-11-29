@@ -46,6 +46,7 @@
     var gameEndStatus = false;
     var winner = "";
     var usersTurn = true;
+	var guesses = 0;
     // 1. Display the full set of suspects, rooms, and weapons at the top of an HTML page for the user to see.
     document.getElementById("suspects").innerHTML = "Suspects: " + suspects.join(", "); // just using variable name will also work
     document.getElementById("rooms").innerHTML = "Rooms: " + rooms.join(", "); // just using variable name will also work
@@ -100,7 +101,6 @@
         constructGuessingDiv();
         populateSelectOptions();
     }
-
     // 4. Display an HTML form that allows you to select 1 suspect, 1 weapon, and 1 room. I suggest you use a choice box for this but in fact it does not matter what you use as long as it is an HTML form.
     function constructGuessingDiv() {
         var formNode = document.createElement("form");
@@ -180,11 +180,9 @@
         }
         str += "<br>" + "Game against - " + username + ", played on - " + today + ", winner was - " + winner;
         localStorage.setItem("record", str);
-
         usersTurn = true;
         winner = "";
         gameEndStatus = false;
-
         document.getElementById("form").innerHTML = "<input type='text' placeholder='Enter your name' id='username'><button type='button' onclick='welcomeUser()'>Submit</button>";
     }
     // Fisher-Yates shuffle algorithm
@@ -218,7 +216,6 @@
         var str = "";
         if(sessionStorage.getItem("history") != null)
             str = sessionStorage.getItem("history");
-
         str += "<br>" + username + " guessed : " + selectedRoom + "," + selectedSuspect + "," + selectedWeapon;
         sessionStorage.setItem("history", str);
         if(secretToGuess.room === selectedRoom && secretToGuess.suspect === selectedSuspect && secretToGuess.weapon === selectedWeapon) {
@@ -235,10 +232,11 @@
         }
         constructContinueDiv();
         document.getElementById("guessBtn").disabled = true;
+		
+		guesses++;
     }
     // When the user’s (incorrect) move is complete, have the Computer make a guess. A simple random guess will do,though the program should know not to guess cards that it itself holds. Like #4, display a message indicating whether the Computer’s guess was correct or not, and a Continue button at the end. CAVEAT: The distinction here is that you are told the Computer’s guess, but should not be told the incorrect component of the guess, which is different than what happens for the user (5.b.2).
     function computerGuess() {
-
         var filteredSuspects = suspects.filter(function(x) { return computersHand.indexOf(x) < 0 }); // the longer way is to use two for loops and remove common elements
         var filteredRooms = rooms.filter(function(x) { return computersHand.indexOf(x) < 0 }); // the longer way is to use two for loops and remove common elements
         var filteredWeapons = weapons.filter(function(x) { return computersHand.indexOf(x) < 0 }); // the longer way is to use two for loops and remove common elements
@@ -249,11 +247,8 @@
         var str = "";
         if(sessionStorage.getItem("history") != null)
             str = sessionStorage.getItem("history");
-
         str += "<br>" + username + " guessed : " +  computersGuess.room  + "," + computersGuess.suspect + "," + computersGuess.weapon;
         sessionStorage.setItem("history", str);
-
-
         document.getElementById("roundResult").innerHTML = "Computer's guess was - " + computersGuess.room + " " + computersGuess.suspect + " " + computersGuess.weapon;
         if(secretToGuess.room === computersGuess.room && secretToGuess.suspect === computersGuess.suspect && secretToGuess.weapon === computersGuess.weapon) {
             document.getElementById("roundResult").innerHTML += "<br>Computer Won!!!";
@@ -270,9 +265,10 @@
         document.getElementById("roundResult").innerHTML = "";
         document.getElementById("guessBtn").disabled = false;
         if(gameEndStatus) {
-
             restartGame(); // restart game
-            Android.goBack();
+			let jsonArr = JSON.stringify({username: username, guesses: guesses, room: secretToGuess["room"], suspect: secretToGuess["suspect"], weapon: secretToGuess["weapon"]});
+			//console.log(jsonArr);
+            Android.goBack(jsonArr);
         } else {
             if(usersTurn) {
                 usersTurn = false;
@@ -281,14 +277,12 @@
                 usersTurn = true;
             }
         }
-
     }
    function showHistory() {
 		if(document.getElementById("guessHistoryDetails").hasAttribute("hidden")) {
 			document.getElementById("historyBtn").innerHTML = "Hide History";
 			document.getElementById("guessHistoryDetails").removeAttribute("hidden");
 			document.getElementById("guessHistoryDetails").innerHTML = sessionStorage.getItem("history") + "test";
-
 		} else {
 			document.getElementById("guessHistoryDetails").setAttribute("hidden", true);
 			document.getElementById("historyBtn").innerHTML = "Show History";
